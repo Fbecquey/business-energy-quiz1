@@ -537,18 +537,8 @@
 <div class="quiz-wrap">
     <div class="card" id="app">
 
-        <!-- Intro Screen -->
-        <div id="screen-intro">
-            <div class="intro-block">
-                <p>Most business problems have a surface cause and a deeper one. This assessment identifies where the energetic layer of your business is holding, draining, or missing altogether.</p>
-                <p class="intro-meta">Takes about 2 minutes &nbsp;·&nbsp; No email required to see your result.</p>
-                <button class="btn" onclick="startQuiz()">Start the Assessment</button>
-                <p class="intro-note">Developed with the insights of Usman Baloch, practitioner at Earth Energetics, who reads the energetic layer of businesses remotely.</p>
-            </div>
-        </div>
-
         <!-- Quiz Screen -->
-        <div id="screen-quiz" style="display:none;">
+        <div id="screen-quiz">
             <div class="progress-wrap">
                 <div class="progress-meta">
                     <span id="q-counter">Question 1 of 8</span>
@@ -710,12 +700,6 @@
     let answers = [];
     let selectedIndex = null;
 
-    function startQuiz() {
-        document.getElementById('screen-intro').style.display = 'none';
-        document.getElementById('screen-quiz').style.display = 'block';
-        renderQuestion();
-    }
-
     function renderQuestion() {
         const q = questions[current];
         const total = questions.length;
@@ -826,6 +810,9 @@
             pdfBreakdown.appendChild(row);
         });
     }
+
+    // Start quiz immediately on load
+    window.addEventListener('DOMContentLoaded', renderQuestion);
 
     function saveAsPDF() {
         const el = document.getElementById('pdf-target');
